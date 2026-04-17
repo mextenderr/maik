@@ -1,14 +1,11 @@
 .bubble-menu {
   left: 0;
   right: 0;
-  top: 2em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 0 2em;
+  top: 0;
   pointer-events: none;
   z-index: 99;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease,
+    box-shadow 0.3s ease, opacity 0.3s ease;
 }
 
 .bubble-menu.fixed {
@@ -17,6 +14,34 @@
 
 .bubble-menu.absolute {
   position: absolute;
+}
+
+.bubble-menu.scrolled {
+  background-color: #ffffff;
+  box-shadow: 0 1px 0 rgba(28, 28, 28, 0.06);
+}
+
+.bubble-menu-inner {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .bubble-menu-inner {
+    padding: 1.5rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bubble-menu-inner {
+    padding: 1.5rem 3rem;
+  }
 }
 
 .bubble-menu .bubble {
@@ -89,7 +114,7 @@
 .bubble-menu .menu-line {
   width: 18px;
   height: 2px;
-  background: #111;
+  background: #0f2a4a;
   border-radius: 2px;
   display: block;
   margin: 0 auto;
@@ -179,12 +204,12 @@
 
 .bubble-menu-items .pill-link {
   --pill-bg: #ffffff;
-  --pill-color: #111;
+  --pill-color: #0f2a4a;
   --pill-border: rgba(0, 0, 0, 0.12);
   --item-rot: 0deg;
   --pill-min-h: 160px;
   --hover-bg: #f3f4f6;
-  --hover-color: #111;
+  --hover-color: #0f2a4a;
   width: 100%;
   min-height: var(--pill-min-h);
   padding: clamp(1.5rem, 3vw, 8rem) 0;

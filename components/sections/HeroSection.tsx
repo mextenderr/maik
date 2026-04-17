@@ -26,9 +26,9 @@ export default function HeroSection({
   useHeroEntrance(sectionRef);
 
   return (
-    <section ref={sectionRef} className="relative bg-[#111] overflow-hidden lg:min-h-screen lg:flex lg:items-center">
+    <section ref={sectionRef} className="relative bg-[#0f2a4a] overflow-hidden lg:min-h-screen lg:flex lg:items-center">
       {/* Image — top block on mobile, right half on desktop */}
-      <div data-hero-image className="relative h-[45vh] lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
+      <div data-hero-image className="relative h-[45vh] md:h-[55vh] lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
         <Image
           src="/images/maik-hero.jpg"
           alt="Maik van Velthoven"
@@ -39,7 +39,7 @@ export default function HeroSection({
       </div>
 
       {/* Content — solid dark background, below image on mobile */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-12 py-10 lg:py-24 w-full">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-8 lg:px-12 py-10 md:py-14 lg:py-24 w-full">
         <div className="lg:w-1/2">
           <p data-hero-label className="text-white/60 text-[11px] font-medium tracking-[0.3em] uppercase">
             Voice Actor
@@ -47,16 +47,16 @@ export default function HeroSection({
         </div>
 
         <h1 className="mt-4 lg:mt-5 pointer-events-none">
-          <span data-hero-name1 className="block text-white text-7xl md:text-8xl lg:text-[9rem] font-semibold tracking-tighter leading-none">
+          <span data-hero-name1 className="block text-white text-7xl md:text-[6rem] lg:text-[7.5rem] xl:text-[9rem] font-semibold tracking-tighter leading-none">
             MAIK
           </span>
-          <span data-hero-name2 className="block text-white/30 lg:text-white/10 text-5xl md:text-6xl lg:text-[5.5rem] font-semibold tracking-tighter leading-none mt-1">
+          <span data-hero-name2 className="block text-white/30 lg:text-white/10 text-5xl md:text-[4.5rem] lg:text-[4.5rem] xl:text-[5.5rem] font-semibold tracking-tighter leading-none mt-1">
             VAN VELTHOVEN
           </span>
         </h1>
 
         <div className="lg:w-1/2">
-          <p data-hero-desc className="mt-8 text-white/60 text-sm max-w-sm leading-relaxed">
+          <p data-hero-desc className="mt-8 text-white/60 text-sm md:text-base max-w-sm leading-relaxed">
             Professionele stem voor commercials, narratieve producties en
             corporate content.
           </p>
@@ -82,7 +82,7 @@ export default function HeroSection({
                     <div
                       className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
                         isActive
-                          ? "bg-white text-[#111]"
+                          ? "bg-white text-[#0f2a4a]"
                           : "bg-white/10 text-white"
                       }`}
                     >

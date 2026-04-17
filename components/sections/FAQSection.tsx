@@ -6,39 +6,29 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const faqItems = [
   {
-    question: "Welke soorten projecten neem je aan?",
+    question: "Voor wat voor projecten kun je worden ingezet?",
     answer:
-      "Ik neem diverse projecten aan, waaronder commercials, narratieve producties, corporate video's, e-learning modules, audioboeken en meer. Neem gerust contact op om je specifieke project te bespreken.",
+      "Ik ben inzetbaar voor de volgende soorten projecten: tv- en radiocommercials, voice-over dubbing, bedrijfsfilms, online video en social media, en e-learning.",
   },
   {
-    question: "Hoe lang duurt het voordat ik mijn opname ontvang?",
+    question: "Wat kost een voice-over?",
     answer:
-      "De levertijd hangt af van de omvang van het project. Voor korte commercials lever ik meestal binnen 24-48 uur. Grotere projecten worden in overleg gepland. Spoedopdrachten zijn mogelijk tegen een meerprijs.",
+      "De prijs hangt af van verschillende factoren, zoals de lengte van de tekst, het type project (bijvoorbeeld commercial, dubbing of social media) en het gebruik van de opname. Daarom heb ik in mijn tarieven vermeld hoe de prijzen worden opgebouwd. Alle afspraken worden vooraf duidelijk afgestemd, zodat je precies weet waar je aan toe bent. Vragen? Neem alsjeblieft contact op zodat ik je een prijsindicatie kan geven. Dan komen we er samen vast uit!",
   },
   {
-    question: "Wat heb je nodig om te beginnen met mijn project?",
+    question: "Hoe snel kun je een opname leveren?",
     answer:
-      "Ik heb het script nodig, eventuele referenties voor de gewenste stijl of toon, en informatie over het doel en de doelgroep van het project.",
+      "In de meeste gevallen kan ik snel schakelen en binnen 24 uur aanleveren, afhankelijk van de lengte en tijd die ik in de opdracht zal steken. Heb je een deadline? Laat het vooral weten, dan kijk ik wat mogelijk is.",
   },
   {
-    question: "In welke talen kun je inspreken?",
+    question: "Kun je retakes of revisies doen?",
     answer:
-      "Ik werk voornamelijk in het Nederlands, maar kan ook in het Engels inspreken. Voor andere talen werk ik samen met collega-voice actors uit mijn netwerk.",
+      "Retakes: je krijgt standaard een correctieronde. Dit gaat om kleine aanpassingen zoals intonatie of toon. Uiteraard zal ik kosteloos een retake sturen mocht de tone of voice toch niet direct aan je verwachtingen voldoen. Revisies: kleine aanpassingen zijn geen probleem. Binnen 48 uur kan ik maximaal 2 keer opnieuw inspreken voor je. Ik zorg er graag voor dat het eindresultaat precies aansluit bij jouw wensen. In overleg kijken we wat nodig is om tot het beste resultaat te komen.",
   },
   {
-    question: "Hoeveel revisies zijn inbegrepen?",
+    question: "Hoe worden de opnames aangeleverd?",
     answer:
-      "Eén revisieronde is standaard inbegrepen. Kleine correcties door mijn fout zijn altijd gratis. Bij grotere scriptwijzigingen of extra revisierondes worden aanvullende kosten berekend.",
-  },
-  {
-    question: "In welk formaat ontvang ik de bestanden?",
-    answer:
-      "Standaard lever ik in WAV (48kHz/24bit) en MP3. Andere formaten zoals AIFF of specifieke specs voor broadcast zijn op verzoek beschikbaar, zonder extra kosten.",
-  },
-  {
-    question: "Kan ik een proefopname aanvragen?",
-    answer:
-      "Ja, voor grotere projecten bied ik graag een korte proefopname aan zodat je kunt horen of mijn stem en stijl bij jouw project passen. Neem contact op om dit te bespreken.",
+      "Opnames kunnen worden aangeleverd in WAV- of MP3-bestanden. Na je aanvraag bespreken we jouw wensen, de tone of voice en het doel van de opname. Vervolgens ga ik aan de slag en ontvang je de voice-over ter beoordeling. Waar nodig pas ik het aan, zodat het perfect aansluit bij jouw project.",
   },
 ];
 
@@ -46,41 +36,46 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="pt-20 pb-24 md:pt-32 md:pb-36">
-      <ScrollReveal animation="fade-up">
-        <h2 className="text-5xl md:text-6xl font-semibold text-[#1a1a1a] text-center mb-10 px-6">
-          FAQ
-        </h2>
-      </ScrollReveal>
-      <ScrollReveal animation="fade-up" stagger={0.08} className="max-w-3xl mx-auto md:px-6">
-        {faqItems.map((item, idx) => {
-          const isOpen = openIndex === idx;
-          return (
-            <div key={idx} className="bg-white mb-3">
-              <button
-                onClick={() => setOpenIndex(isOpen ? null : idx)}
-                className="flex items-center justify-between w-full px-6 py-4 text-left cursor-pointer"
-              >
-                <span className="text-sm font-semibold text-[#2c2c2c] pr-4">
-                  {item.question}
-                </span>
-                {isOpen ? (
-                  <ChevronUp className="w-5 h-5 text-[#2c2c2c] shrink-0" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-[#2c2c2c] shrink-0" />
+    <section className="pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-36 lg:pb-40">
+      <div className="max-w-3xl mx-auto px-6 md:px-8 lg:px-12">
+        <ScrollReveal animation="fade-up">
+          <p className="text-[#1c1c1c]/40 text-[10px] font-medium tracking-[0.25em] uppercase text-center">
+            Veelgestelde vragen
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1c1c1c] text-center mt-3 mb-10 md:mb-14">
+            FAQ
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" stagger={0.08}>
+          {faqItems.map((item, idx) => {
+            const isOpen = openIndex === idx;
+            return (
+              <div key={idx} className="bg-white mb-3 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : idx)}
+                  className="flex items-center justify-between w-full px-6 md:px-7 py-4 md:py-5 text-left cursor-pointer"
+                >
+                  <span className="text-sm md:text-base font-semibold text-[#1c1c1c] pr-4">
+                    {item.question}
+                  </span>
+                  {isOpen ? (
+                    <ChevronUp className="w-5 h-5 text-[#1c1c1c] shrink-0" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-[#1c1c1c] shrink-0" />
+                  )}
+                </button>
+                {isOpen && (
+                  <div className="px-6 md:px-7 pb-5 md:pb-6">
+                    <p className="text-sm md:text-base text-[#1c1c1c]/70 leading-relaxed">
+                      {item.answer}
+                    </p>
+                  </div>
                 )}
-              </button>
-              {isOpen && (
-                <div className="px-6 pb-5">
-                  <p className="text-sm text-[#2c2c2c]/70 leading-relaxed">
-                    {item.answer}
-                  </p>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </ScrollReveal>
+              </div>
+            );
+          })}
+        </ScrollReveal>
+      </div>
     </section>
   );
 }

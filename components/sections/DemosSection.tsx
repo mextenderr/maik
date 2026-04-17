@@ -14,10 +14,10 @@ type DemosSectionProps = {
 export default function DemosSection({ onPlay, currentTrack }: DemosSectionProps) {
   return (
     <section className="px-6 py-12 md:py-20 max-w-3xl mx-auto w-full">
-      <h2 className="text-5xl md:text-6xl font-semibold text-[#1a1a1a] text-center">
+      <h2 className="text-5xl md:text-6xl font-semibold text-[#1c1c1c] text-center">
         DEMOS
       </h2>
-      <p className="mt-6 text-xs md:text-sm text-[#2c2c2c] text-center font-medium leading-relaxed">
+      <p className="mt-6 text-xs md:text-sm text-[#1c1c1c] text-center font-medium leading-relaxed">
         Beluister hier mijn demo&apos;s terwijl je verder scrolt
         <br />
         op mijn pagina
@@ -31,8 +31,8 @@ export default function DemosSection({ onPlay, currentTrack }: DemosSectionProps
               onClick={() => onPlay(demo)}
               className={`flex items-center w-full px-5 py-3 gap-4 transition-colors cursor-pointer ${
                 isActive
-                  ? "bg-[#2c2c2c] text-white"
-                  : "bg-white text-[#2c2c2c] hover:bg-gray-50"
+                  ? "bg-[#0f2a4a] text-white"
+                  : "bg-white text-[#1c1c1c] hover:bg-gray-50"
               }`}
             >
               <Image

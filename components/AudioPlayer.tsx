@@ -118,7 +118,7 @@ export default function AudioPlayer({ track, onClose, onPlayingChange }: AudioPl
           visible ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <div className="bg-[#1a1a1a] text-white px-4 py-3 md:px-6 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
+        <div className="bg-[#0f2a4a] text-white px-4 py-3 md:px-6 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
           <div className="max-w-3xl mx-auto flex items-center gap-3 md:gap-4">
             {/* Play/pause */}
             <button

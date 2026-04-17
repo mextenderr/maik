@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="bg-[#1a1a1a] text-white px-6 py-16 md:py-20">
-      <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+    <footer className="bg-[#0f2a4a] text-white px-6 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-12">
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-semibold mb-4">MAIK VAN VELTHOVEN</h3>

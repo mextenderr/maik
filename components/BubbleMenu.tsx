@@ -83,7 +83,7 @@ export default function BubbleMenu({
   style,
   menuAriaLabel = "Toggle menu",
   menuBg = "#fff",
-  menuContentColor = "#111",
+  menuContentColor = "#0f2a4a",
   useFixedPosition = false,
   items,
   animationEase = "back.out(1.5)",
@@ -92,6 +92,7 @@ export default function BubbleMenu({
 }: BubbleMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const bubblesRef = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -101,6 +102,7 @@ export default function BubbleMenu({
   const containerClassName = [
     "bubble-menu",
     useFixedPosition ? "fixed" : "absolute",
+    isScrolled ? "scrolled" : "",
     className,
   ]
     .filter(Boolean)
@@ -169,6 +171,13 @@ export default function BubbleMenu({
   }, [isMenuOpen, showOverlay, animationEase, animationDuration, staggerDelay]);
 
   useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
     const handleResize = () => {
       if (isMenuOpen) {
         const bubbles = bubblesRef.current.filter(Boolean);
@@ -195,27 +204,49 @@ export default function BubbleMenu({
         style={style}
         aria-label="Main navigation"
       >
-        <a href="#contact" className="text-sm font-semibold text-[#111] bg-white px-5 py-2 rounded-full pointer-events-auto no-underline hover:bg-white/90 transition-colors">
-          Contact &rarr;
-        </a>
+        <div className="bubble-menu-inner">
+          <a
+            href="#contact"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-white bg-[#b2492b] pl-5 pr-2 py-2 rounded-full pointer-events-auto no-underline shadow-[0_6px_20px_-6px_rgba(178,73,43,0.6)] hover:bg-[#9e4025] hover:shadow-[0_8px_24px_-6px_rgba(178,73,43,0.7)] hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Contact
+            <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/15 group-hover:bg-white/25 transition-colors">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                className="transition-transform duration-200 group-hover:translate-x-0.5"
+              >
+                <path
+                  d="M1 6h10m-4-4 4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
 
-        <button
-          type="button"
-          className={`bubble toggle-bubble menu-btn ${isMenuOpen ? "open" : ""}`}
-          onClick={handleToggle}
-          aria-label={menuAriaLabel}
-          aria-pressed={isMenuOpen}
-          style={{ background: menuBg }}
-        >
-          <span
-            className="menu-line"
-            style={{ background: menuContentColor }}
-          />
-          <span
-            className="menu-line short"
-            style={{ background: menuContentColor }}
-          />
-        </button>
+          <button
+            type="button"
+            className={`bubble toggle-bubble menu-btn ${isMenuOpen ? "open" : ""}`}
+            onClick={handleToggle}
+            aria-label={menuAriaLabel}
+            aria-pressed={isMenuOpen}
+            style={{ background: menuBg }}
+          >
+            <span
+              className="menu-line"
+              style={{ background: menuContentColor }}
+            />
+            <span
+              className="menu-line short"
+              style={{ background: menuContentColor }}
+            />
+          </button>
+        </div>
       </nav>
       {showOverlay && (
         <div
@@ -239,6 +270,7 @@ export default function BubbleMenu({
                 <a
                   role="menuitem"
                   href={item.href}
+                  onClick={handleToggle}
                   aria-label={item.ariaLabel || item.label}
                   className="pill-link"
                   style={

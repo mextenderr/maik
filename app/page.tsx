@@ -7,6 +7,7 @@ import SectionDivider from "@/components/SectionDivider";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import StudioSection from "@/components/sections/StudioSection";
+import WerkwijzeSection from "@/components/sections/WerkwijzeSection";
 import TarievenSection from "@/components/sections/TarievenSection";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -14,32 +15,46 @@ import Footer from "@/components/sections/Footer";
 
 const menuItems = [
   {
-    label: "home",
-    href: "#",
-    ariaLabel: "Home",
-    rotation: -8,
-    hoverStyles: { bgColor: "#2c2c2c", textColor: "#ffffff" },
-  },
-  {
     label: "demos",
     href: "#demos",
     ariaLabel: "Demos",
-    rotation: 8,
-    hoverStyles: { bgColor: "#2c2c2c", textColor: "#ffffff" },
+    rotation: -8,
+    hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
   },
   {
     label: "over mij",
     href: "#about",
     ariaLabel: "Over mij",
     rotation: 8,
-    hoverStyles: { bgColor: "#2c2c2c", textColor: "#ffffff" },
+    hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
   },
   {
     label: "studio",
     href: "#studio",
     ariaLabel: "Studio",
     rotation: -8,
-    hoverStyles: { bgColor: "#2c2c2c", textColor: "#ffffff" },
+    hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
+  },
+  {
+    label: "werkwijze",
+    href: "#werkwijze",
+    ariaLabel: "Werkwijze",
+    rotation: 8,
+    hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
+  },
+  {
+    label: "tarieven",
+    href: "#tarieven",
+    ariaLabel: "Tarieven",
+    rotation: -8,
+    hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
+  },
+  {
+    label: "faq",
+    href: "#faq",
+    ariaLabel: "FAQ",
+    rotation: 8,
+    hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
   },
 ];
 
@@ -48,12 +63,12 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <main className="relative bg-[#f5f5f5] min-h-screen">
+    <main className="relative bg-[#faf7f1] min-h-screen">
       <BubbleMenu
         items={menuItems}
         menuAriaLabel="Toggle navigation"
         menuBg="#ffffff"
-        menuContentColor="#111111"
+        menuContentColor="#0f2a4a"
         useFixedPosition={true}
         animationEase="back.out(1.5)"
         animationDuration={0.5}
@@ -80,11 +95,21 @@ export default function Home() {
         <StudioSection />
       </div>
 
-      <TarievenSection />
+      <SectionDivider />
+
+      <div id="werkwijze">
+        <WerkwijzeSection />
+      </div>
+
+      <div id="tarieven">
+        <TarievenSection />
+      </div>
 
       <SectionDivider />
 
-      <FAQSection />
+      <div id="faq">
+        <FAQSection />
+      </div>
 
       <SectionDivider />
 
