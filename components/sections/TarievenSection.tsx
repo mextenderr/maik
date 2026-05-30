@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
+import SectionDivider from "@/components/SectionDivider";
 
 type MatrixTable = {
   kind: "matrix";
@@ -25,7 +26,7 @@ type Category = {
   tables: (MatrixTable | ListTable)[];
 };
 
-const categories: Category[] = [
+export const categories: Category[] = [
   {
     id: "radio",
     label: "Radio commercial",
@@ -196,37 +197,38 @@ function MatrixView({ table }: { table: MatrixTable }) {
           {table.title}
         </h4>
       )}
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="text-white/40 text-xs font-medium uppercase tracking-wider">
-              <th className="text-left pb-3 pr-4 font-medium"></th>
-              {table.columns.map((col) => (
-                <th key={col} className="text-right pb-3 px-4 font-medium">
-                  {col}
-                </th>
+      <table className="w-full text-xs md:text-sm">
+        <thead>
+          <tr className="text-white/40 text-[10px] md:text-xs font-medium uppercase tracking-normal md:tracking-wider">
+            <th className="text-left pb-3 pr-2 md:pr-4 font-medium"></th>
+            {table.columns.map((col) => (
+              <th key={col} className="text-right pb-3 px-2 md:px-4 font-medium">
+                {col}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row) => (
+            <tr
+              key={row.label}
+              className="border-t border-white/10 text-white/80"
+            >
+              <td className="py-3 pr-2 md:pr-4 font-medium text-white">
+                {row.label}
+              </td>
+              {row.values.map((v, i) => (
+                <td
+                  key={i}
+                  className="py-3 px-2 md:px-4 text-right tabular-nums whitespace-nowrap"
+                >
+                  {v}
+                </td>
               ))}
             </tr>
-          </thead>
-          <tbody>
-            {table.rows.map((row) => (
-              <tr
-                key={row.label}
-                className="border-t border-white/10 text-white/80"
-              >
-                <td className="py-3 pr-4 font-medium text-white">
-                  {row.label}
-                </td>
-                {row.values.map((v, i) => (
-                  <td key={i} className="py-3 px-4 text-right tabular-nums">
-                    {v}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
       {table.footnote && (
         <p className="text-white/40 text-xs mt-3">{table.footnote}</p>
       )}
@@ -267,13 +269,11 @@ export default function TarievenSection() {
   const active = categories.find((c) => c.id === activeId) ?? categories[0];
 
   return (
-    <section className="bg-[#0f2a4a] pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-36 lg:pb-40">
-      <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12">
+    <section className="bg-[#0f2a4a] pb-24 md:pb-32 lg:pb-40">
+      <SectionDivider dark />
+      <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12 pt-20 md:pt-32 lg:pt-40">
         <ScrollReveal animation="fade-up">
-          <p className="text-white/40 text-[10px] font-medium tracking-[0.25em] uppercase text-center">
-            Tarieven
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white text-center mt-3">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white text-center">
             Tarieven
           </h2>
           <p className="text-white/50 text-sm md:text-base text-center mt-4 max-w-xl mx-auto leading-relaxed">

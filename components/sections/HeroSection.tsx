@@ -30,7 +30,7 @@ export default function HeroSection({
       {/* Image — top block on mobile, right half on desktop */}
       <div data-hero-image className="relative h-[45vh] md:h-[55vh] lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
         <Image
-          src="/images/maik-hero.jpg"
+          src="/images/maik-1.webp"
           alt="Maik van Velthoven"
           fill
           className="object-cover grayscale"

@@ -1,24 +1,6 @@
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const studioImages = [
-  {
-    src: "/images/studio-2.jpg",
-    alt: "Studio opname ruimte",
-    h: "h-[203px] md:h-[260px] lg:h-[300px]",
-  },
-  {
-    src: "/images/studio-3.jpg",
-    alt: "Studio apparatuur",
-    h: "h-[170px] md:h-[220px] lg:h-[260px]",
-  },
-  {
-    src: "/images/studio-4.jpg",
-    alt: "Studio overzicht",
-    h: "h-[201px] md:h-[260px] lg:h-[300px]",
-  },
-];
-
 export default function StudioSection() {
   return (
     <section className="relative pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-36 lg:pb-40 overflow-hidden">
@@ -59,10 +41,10 @@ export default function StudioSection() {
                 professionele voice-overs op.
               </p>
               <p>
-                De ruimte is akoestisch behandeld om ongewenste galm en
-                achtergrondgeluid buiten te houden. Zo ontstaat een warme,
-                natuurlijke klank waar elk woord tot zijn recht komt — precies
-                wat een goede opname nodig heeft.
+                De opnameruimte is bestemd tegen ongewenste galm en houd
+                achtergrondgeluiden buiten. Zo ontstaat een warme, natuurlijke
+                opname waar elk woord tot zijn recht komt — precies wat een
+                goede opname nodig heeft.
               </p>
               <p>
                 Omdat ik vanuit eigen studio werk, ben ik flexibel in planning
@@ -74,25 +56,18 @@ export default function StudioSection() {
           </ScrollReveal>
         </div>
 
-        {/* Studio images — staggered */}
+        {/* Studio image — shown in full */}
         <ScrollReveal
           animation="scale-in"
-          stagger={0.15}
-          className="mt-12 md:mt-16 lg:mt-40 space-y-5 max-w-md mx-auto md:max-w-none md:grid md:grid-cols-3 md:gap-5 lg:gap-6 md:space-y-0"
+          className="mt-12 md:mt-16 lg:mt-40 max-w-sm mx-auto"
         >
-          {studioImages.map((img) => (
-            <div
-              key={img.src}
-              className={`relative w-full ${img.h} rounded-[30px] overflow-hidden`}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover"
-              />
-            </div>
-          ))}
+          <Image
+            src="/images/studio.webp"
+            alt="Studio opnameopstelling met microfoon en interface"
+            width={1100}
+            height={1311}
+            className="w-full h-auto rounded-[30px]"
+          />
         </ScrollReveal>
       </div>
     </section>

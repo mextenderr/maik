@@ -1,0 +1,29 @@
+{
+  "name": "maik",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/anthropics/devcontainer-features/claude-code:latest": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "remoteUser": "node",
+  "workspaceFolder": "/workspace",
+  "runArgs": ["--env-file=.devcontainer/.env"],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "mounts": [
+    "source=maik-claude-config,target=/home/node/.claude,type=volume",
+    "source=maik-node-modules,target=/workspace/node_modules,type=volume",
+    "source=maik-next-build,target=/workspace/.next,type=volume"
+  ],
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "portsAttributes": {
+    "3000": { "onAutoForward": "ignore" }
+  },
+  "otherPortsAttributes": { "onAutoForward": "ignore" },
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint"]
+    }
+  }
+}

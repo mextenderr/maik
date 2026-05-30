@@ -38,10 +38,7 @@ export default function WerkwijzeSection() {
     <section className="pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-36 lg:pb-40">
       <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12">
         <ScrollReveal animation="fade-up">
-          <p className="text-[#1c1c1c]/40 text-[10px] font-medium tracking-[0.25em] uppercase text-center">
-            Werkwijze
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1c1c1c] text-center mt-3">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1c1c1c] text-center">
             Werkwijze
           </h2>
           <p className="text-[#1c1c1c]/60 text-sm md:text-base text-center mt-4 max-w-xl mx-auto leading-relaxed">

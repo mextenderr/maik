@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude mcp:*)",
+      "WebFetch(domain:www.figma.com)",
+      "mcp__figma-remote-mcp__get_design_context",
+      "Bash(file public/images/*)",
+      "Bash(npm run:*)",
+      "Bash(npx tsc:*)",
+      "Bash(ls -la /Users/max/projects/maik/public/*.mp4 /Users/max/projects/maik/public/**/*.mp4)",
+      "Bash(ffprobe -hide_banner /Users/max/projects/maik/public/audio-commercials.mp4)",
+      "Bash(ffprobe -hide_banner /Users/max/projects/maik/public/audio-narratieve-corporate.mp4)",
+      "Bash(ffmpeg -y -i /Users/max/projects/maik/public/audio-commercials.mp4 -vn -acodec libmp3lame -q:a 4 /Users/max/projects/maik/public/audio/commercials.mp3)",
+      "Bash(ffmpeg -y -i /Users/max/projects/maik/public/audio-narratieve-corporate.mp4 -vn -acodec libmp3lame -q:a 4 /Users/max/projects/maik/public/audio/narratieve-corporate.mp3)",
+      "WebSearch",
+      "Bash(grep -iE '\\\\.\\(docx|doc|pdf|txt|md\\)$')",
+      "Bash(python3 -c ' *)",
+      "Bash(npx eslint *)",
+      "Bash(npx next *)",
+      "Bash(git config *)"
+    ]
+  }
+}

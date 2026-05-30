@@ -1,28 +1,93 @@
 "use client";
 
+import { useEffect, useRef, type BaseSyntheticEvent } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { Mail, Phone, MessageCircle } from "lucide-react";
-import ScrollReveal from "@/components/ScrollReveal";
 
-// TODO: replace with real contact details before launch
+import ScrollReveal from "@/components/ScrollReveal";
+import { categories } from "@/components/sections/TarievenSection";
+import { contactSchema, type ContactFormValues } from "@/lib/contact-schema";
+import { submitContact } from "@/app/actions/contact";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 const contactChannels = [
   {
     icon: Mail,
-    label: "hello@example.com",
-    href: "mailto:hello@example.com",
+    label: "info@maikvanvelthoven.nl",
+    href: "mailto:info@maikvanvelthoven.nl",
   },
   {
     icon: Phone,
-    label: "+31 6 00 00 00 00",
-    href: "tel:+31600000000",
+    label: "+31 6 25115769",
+    href: "tel:+31625115769",
   },
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    href: "https://wa.me/31600000000",
+    href: "https://wa.me/31625115769",
   },
 ];
 
+const fieldClass =
+  "bg-[#faf7f1] w-full text-sm text-[#1c1c1c] border-black/5 rounded-md focus-visible:border-[#0f2a4a] focus-visible:ring-0";
+
+// Wrapped so it reads the clock at call time (in effects/handlers), not during render.
+const nowMs = () => Date.now();
+
 export default function ContactSection() {
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: { naam: "", email: "", onderwerp: "", bericht: "" },
+  });
+
+  const { isSubmitting } = form.formState;
+
+  // Spam protection: stamp the render time into a hidden input on mount, then
+  // read it (and the honeypot) from FormData at submit — no refs in the handler.
+  const startedAtInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (startedAtInputRef.current) {
+      startedAtInputRef.current.value = String(nowMs());
+    }
+  }, []);
+
+  async function onSubmit(values: ContactFormValues, event?: BaseSyntheticEvent) {
+    const formEl = event?.target as HTMLFormElement | undefined;
+    const data = formEl ? new FormData(formEl) : undefined;
+    const website = ((data?.get("website") as string | null) ?? "").trim();
+    const startedAt = Number(data?.get("startedAt")) || 0;
+
+    const result = await submitContact(values, {
+      website,
+      elapsedMs: startedAt ? nowMs() - startedAt : undefined,
+    });
+    if (result.success) {
+      toast.success("Bedankt! Je bericht is verzonden.");
+      form.reset();
+    } else {
+      toast.error(result.error);
+    }
+  }
+
   return (
     <section className="pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-36 lg:pb-40">
       <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12">
@@ -59,58 +124,133 @@ export default function ContactSection() {
           </ScrollReveal>
 
           {/* Right: form */}
-          <ScrollReveal animation="fade-up" delay={0.1} stagger={0.08}>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="space-y-4 bg-white rounded-2xl p-6 md:p-8 lg:p-10 shadow-sm"
-            >
-              <div>
-                <label
-                  htmlFor="naam"
-                  className="block text-sm font-semibold text-[#1c1c1c] mb-1.5"
+          <ScrollReveal animation="fade-up" delay={0.1}>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4 bg-white rounded-2xl p-6 md:p-8 lg:p-10 shadow-sm"
+                noValidate
+              >
+                {/* Honeypot — hidden from humans, bots fill it. Off-screen so
+                    bots that skip display:none fields still see it. */}
+                <div
+                  className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden"
+                  aria-hidden="true"
                 >
-                  Naam
-                </label>
-                <input
-                  id="naam"
-                  type="text"
-                  className="bg-[#faf7f1] h-11 w-full px-4 text-sm text-[#1c1c1c] outline-none rounded-md border border-black/5 focus:border-[#0f2a4a] transition-colors"
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+                {/* Time-trap — render timestamp, stamped in via effect. */}
+                <input type="hidden" name="startedAt" ref={startedAtInputRef} />
+
+                <FormField
+                  control={form.control}
+                  name="naam"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-[#1c1c1c]">
+                        Naam
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          className={`${fieldClass} h-11 px-4`}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-semibold text-[#1c1c1c] mb-1.5"
-                >
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  className="bg-[#faf7f1] h-11 w-full px-4 text-sm text-[#1c1c1c] outline-none rounded-md border border-black/5 focus:border-[#0f2a4a] transition-colors"
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-[#1c1c1c]">
+                        Email
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          className={`${fieldClass} h-11 px-4`}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div>
-                <label
-                  htmlFor="bericht"
-                  className="block text-sm font-semibold text-[#1c1c1c] mb-1.5"
-                >
-                  Bericht
-                </label>
-                <textarea
-                  id="bericht"
-                  className="bg-[#faf7f1] h-[174px] w-full px-4 py-3 text-sm text-[#1c1c1c] outline-none resize-none rounded-md border border-black/5 focus:border-[#0f2a4a] transition-colors"
+
+                <FormField
+                  control={form.control}
+                  name="onderwerp"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-[#1c1c1c]">
+                        Onderwerp
+                      </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger
+                            className={`${fieldClass} !h-11 px-4 [&[data-placeholder]]:text-[#1c1c1c]/50`}
+                          >
+                            <SelectValue placeholder="Selecteer een onderwerp" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {categories.map((cat) => (
+                            <SelectItem key={cat.id} value={cat.label}>
+                              {cat.label}
+                            </SelectItem>
+                          ))}
+                          <SelectItem value="Anders">Anders</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  className="w-full bg-[#b2492b] text-white font-semibold text-sm px-12 py-3.5 rounded-full hover:bg-[#9e4025] transition-colors cursor-pointer"
-                >
-                  Verzenden &rarr;
-                </button>
-              </div>
-            </form>
+
+                <FormField
+                  control={form.control}
+                  name="bericht"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-[#1c1c1c]">
+                        Bericht
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          className={`${fieldClass} min-h-[150px] px-4 py-3 resize-none`}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="pt-2">
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full h-auto bg-[#b2492b] text-white font-semibold text-sm py-3.5 rounded-full hover:bg-[#9e4025]"
+                  >
+                    {isSubmitting ? "Verzenden…" : "Verzenden →"}
+                  </Button>
+                </div>
+              </form>
+            </Form>
           </ScrollReveal>
         </div>
       </div>

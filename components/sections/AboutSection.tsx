@@ -16,10 +16,10 @@ export default function AboutSection() {
           <div className="flex items-center">
             <ScrollReveal
               animation="fade-left"
-              className="relative w-[250px] h-[289px] md:w-[320px] md:h-[370px] -ml-10 md:ml-0 md:mr-auto shrink-0"
+              className="relative w-[250px] h-[289px] md:w-[320px] md:h-[370px] -ml-16 md:ml-0 md:mr-auto shrink-0"
             >
               <Image
-                src="/images/studio-1.jpg"
+                src="/images/maik-2.webp"
                 alt="Maik van Velthoven"
                 fill
                 className="object-cover rounded-[30px]"
@@ -47,7 +47,7 @@ export default function AboutSection() {
             className="relative w-[360px] h-[440px] shrink-0"
           >
             <Image
-              src="/images/studio-1.jpg"
+              src="/images/maik-2.webp"
               alt="Maik van Velthoven"
               fill
               className="object-cover rounded-[30px]"
@@ -150,7 +150,7 @@ export default function AboutSection() {
             className="relative w-[420px] h-[280px] shrink-0"
           >
             <Image
-              src="/images/about-image.jpg"
+              src="/images/script.webp"
               alt="Maik in actie"
               fill
               className="object-cover rounded-[30px]"
@@ -166,7 +166,7 @@ export default function AboutSection() {
         >
           <div className="relative w-[294px] h-[196px] md:w-[420px] md:h-[280px]">
             <Image
-              src="/images/about-image.jpg"
+              src="/images/script.webp"
               alt="Maik in actie"
               fill
               className="object-cover rounded-[30px]"

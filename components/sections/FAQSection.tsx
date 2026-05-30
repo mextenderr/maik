@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const faqItems = [
@@ -54,23 +54,30 @@ export default function FAQSection() {
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
                   className="flex items-center justify-between w-full px-6 md:px-7 py-4 md:py-5 text-left cursor-pointer"
+                  aria-expanded={isOpen}
                 >
                   <span className="text-sm md:text-base font-semibold text-[#1c1c1c] pr-4">
                     {item.question}
                   </span>
-                  {isOpen ? (
-                    <ChevronUp className="w-5 h-5 text-[#1c1c1c] shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-[#1c1c1c] shrink-0" />
-                  )}
+                  <ChevronDown
+                    className={`w-5 h-5 text-[#1c1c1c] shrink-0 transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
-                {isOpen && (
-                  <div className="px-6 md:px-7 pb-5 md:pb-6">
-                    <p className="text-sm md:text-base text-[#1c1c1c]/70 leading-relaxed">
-                      {item.answer}
-                    </p>
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-6 md:px-7 pb-5 md:pb-6">
+                      <p className="text-sm md:text-base text-[#1c1c1c]/70 leading-relaxed">
+                        {item.answer}
+                      </p>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

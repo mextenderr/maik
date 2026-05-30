@@ -1,11 +1,22 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
-import { Play, Pause, X } from "lucide-react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
+import { Play, Pause, X, Download } from "lucide-react";
 
 export type Track = {
   title: string;
   src: string;
+};
+
+export type AudioPlayerHandle = {
+  toggle: () => void;
 };
 
 type AudioPlayerProps = {
@@ -20,7 +31,10 @@ function formatTime(seconds: number) {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
-export default function AudioPlayer({ track, onClose, onPlayingChange }: AudioPlayerProps) {
+function AudioPlayer(
+  { track, onClose, onPlayingChange }: AudioPlayerProps,
+  ref: React.Ref<AudioPlayerHandle>,
+) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, _setIsPlaying] = useState(false);
   const setIsPlaying = useCallback((v: boolean) => {
@@ -82,6 +96,8 @@ export default function AudioPlayer({ track, onClose, onPlayingChange }: AudioPl
     }
   }, [isPlaying]);
 
+  useImperativeHandle(ref, () => ({ toggle: togglePlay }), [togglePlay]);
+
   const seek = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const audio = audioRef.current;
@@ -114,12 +130,12 @@ export default function AudioPlayer({ track, onClose, onPlayingChange }: AudioPl
     <>
       <audio ref={audioRef} preload="metadata" />
       <div
-        className={`fixed bottom-0 left-0 right-0 z-[100] transition-transform duration-300 ease-out ${
+        className={`fixed bottom-0 left-0 right-0 z-[100] p-3 md:p-4 transition-transform duration-300 ease-out ${
           visible ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <div className="bg-[#0f2a4a] text-white px-4 py-3 md:px-6 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
-          <div className="max-w-3xl mx-auto flex items-center gap-3 md:gap-4">
+        <div className="max-w-3xl mx-auto bg-[#0f2a4a] text-white rounded-2xl border border-white/15 px-4 py-3 md:px-6 shadow-[0_8px_30px_rgba(0,0,0,0.28)]">
+          <div className="flex items-center gap-3 md:gap-4">
             {/* Play/pause */}
             <button
               onClick={togglePlay}
@@ -157,6 +173,16 @@ export default function AudioPlayer({ track, onClose, onPlayingChange }: AudioPl
               </div>
             </div>
 
+            {/* Download */}
+            <a
+              href={track.src}
+              download
+              className="shrink-0 w-8 h-8 flex items-center justify-center text-white/40 hover:text-white transition-colors cursor-pointer"
+              aria-label={`Download ${track.title}`}
+            >
+              <Download className="w-4 h-4" />
+            </a>
+
             {/* Close */}
             <button
               onClick={handleClose}
@@ -171,3 +197,5 @@ export default function AudioPlayer({ track, onClose, onPlayingChange }: AudioPl
     </>
   );
 }
+
+export default forwardRef(AudioPlayer);

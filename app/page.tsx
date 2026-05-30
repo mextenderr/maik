@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import BubbleMenu from "@/components/BubbleMenu";
-import AudioPlayer, { type Track } from "@/components/AudioPlayer";
+import AudioPlayer, {
+  type Track,
+  type AudioPlayerHandle,
+} from "@/components/AudioPlayer";
 import SectionDivider from "@/components/SectionDivider";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
@@ -15,42 +18,42 @@ import Footer from "@/components/sections/Footer";
 
 const menuItems = [
   {
-    label: "demos",
+    label: "Demos",
     href: "#demos",
     ariaLabel: "Demos",
     rotation: -8,
     hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
   },
   {
-    label: "over mij",
+    label: "Over mij",
     href: "#about",
     ariaLabel: "Over mij",
     rotation: 8,
     hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
   },
   {
-    label: "studio",
+    label: "Studio",
     href: "#studio",
     ariaLabel: "Studio",
     rotation: -8,
     hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
   },
   {
-    label: "werkwijze",
+    label: "Werkwijze",
     href: "#werkwijze",
     ariaLabel: "Werkwijze",
     rotation: 8,
     hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
   },
   {
-    label: "tarieven",
+    label: "Tarieven",
     href: "#tarieven",
     ariaLabel: "Tarieven",
     rotation: -8,
     hoverStyles: { bgColor: "#0f2a4a", textColor: "#ffffff" },
   },
   {
-    label: "faq",
+    label: "FAQ",
     href: "#faq",
     ariaLabel: "FAQ",
     rotation: 8,
@@ -61,6 +64,19 @@ const menuItems = [
 export default function Home() {
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const playerRef = useRef<AudioPlayerHandle>(null);
+
+  const handlePlay = useCallback(
+    (track: Track) => {
+      // Clicking the already-active track toggles play/pause instead of reloading it.
+      if (currentTrack?.src === track.src) {
+        playerRef.current?.toggle();
+      } else {
+        setCurrentTrack(track);
+      }
+    },
+    [currentTrack],
+  );
 
   return (
     <main className="relative bg-[#faf7f1] min-h-screen">
@@ -77,7 +93,7 @@ export default function Home() {
 
       <div id="demos">
         <HeroSection
-          onPlay={setCurrentTrack}
+          onPlay={handlePlay}
           currentTrack={currentTrack}
           isPlaying={isPlaying}
         />
@@ -120,6 +136,7 @@ export default function Home() {
       <Footer />
 
       <AudioPlayer
+        ref={playerRef}
         track={currentTrack}
         onClose={() => setCurrentTrack(null)}
         onPlayingChange={setIsPlaying}
