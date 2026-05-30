@@ -37,7 +37,7 @@ export default function FAQSection() {
 
   return (
     <section className="pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-36 lg:pb-40">
-      <div className="max-w-3xl mx-auto px-6 md:px-8 lg:px-12">
+      <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12">
         <ScrollReveal animation="fade-up">
           <p className="text-[#1c1c1c]/40 text-[10px] font-medium tracking-[0.25em] uppercase text-center">
             Veelgestelde vragen

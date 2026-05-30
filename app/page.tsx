@@ -101,35 +101,35 @@ export default function Home() {
 
       <SectionDivider />
 
-      <div id="about">
+      <div id="about" className="scroll-mt-24">
         <AboutSection />
       </div>
 
       <SectionDivider />
 
-      <div id="studio">
+      <div id="studio" className="scroll-mt-24">
         <StudioSection />
       </div>
 
       <SectionDivider />
 
-      <div id="werkwijze">
+      <div id="werkwijze" className="scroll-mt-24">
         <WerkwijzeSection />
       </div>
 
-      <div id="tarieven">
+      <div id="tarieven" className="scroll-mt-40">
         <TarievenSection />
       </div>
 
       <SectionDivider />
 
-      <div id="faq">
+      <div id="faq" className="scroll-mt-24">
         <FAQSection />
       </div>
 
       <SectionDivider />
 
-      <div id="contact">
+      <div id="contact" className="scroll-mt-24">
         <ContactSection />
       </div>
 

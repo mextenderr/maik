@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties, MouseEvent } from "react";
 import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 
@@ -115,6 +115,18 @@ export default function BubbleMenu({
     onMenuClick?.(nextState);
   };
 
+  // Smooth-scroll to an in-page anchor and close the menu if it's open.
+  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#") && href.length > 1) {
+      const target = document.getElementById(href.slice(1));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    if (isMenuOpen) handleToggle();
+  };
+
   useEffect(() => {
     const overlay = overlayRef.current;
     const bubbles = bubblesRef.current.filter(Boolean);
@@ -207,6 +219,7 @@ export default function BubbleMenu({
         <div className="bubble-menu-inner">
           <a
             href="#contact"
+            onClick={(e) => handleNavClick(e, "#contact")}
             className="group inline-flex items-center gap-2 text-sm font-semibold text-white bg-[#b2492b] pl-5 pr-2 py-2 rounded-full pointer-events-auto no-underline shadow-[0_6px_20px_-6px_rgba(178,73,43,0.6)] hover:bg-[#9e4025] hover:shadow-[0_8px_24px_-6px_rgba(178,73,43,0.7)] hover:-translate-y-0.5 transition-all duration-200"
           >
             Contact
@@ -270,7 +283,7 @@ export default function BubbleMenu({
                 <a
                   role="menuitem"
                   href={item.href}
-                  onClick={handleToggle}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   aria-label={item.ariaLabel || item.label}
                   className="pill-link"
                   style={

@@ -29,18 +29,19 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 1.5rem;
+  /* Extra top breathing room + device safe-area (notch / status bar). */
+  padding: calc(1.75rem + env(safe-area-inset-top, 0px)) 1.5rem 1.5rem;
 }
 
 @media (min-width: 768px) {
   .bubble-menu-inner {
-    padding: 1.5rem 2rem;
+    padding: calc(1.75rem + env(safe-area-inset-top, 0px)) 2rem 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .bubble-menu-inner {
-    padding: 1.5rem 3rem;
+    padding: calc(1.75rem + env(safe-area-inset-top, 0px)) 3rem 1.5rem;
   }
 }
 
@@ -260,13 +261,18 @@
 
 @media (max-width: 899px) {
   .bubble-menu-items {
-    padding-top: 0px;
     align-items: flex-start;
-    padding-top: 120px;
+    /* Clear the fixed top bar (incl. safe-area), and leave room at the bottom. */
+    padding-top: calc(96px + env(safe-area-inset-top, 0px));
+    padding-bottom: 24px;
+    /* Safety net: if the list is still taller than the viewport
+       (short screens / landscape / many items), let it scroll. */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .bubble-menu-items .pill-list {
-    row-gap: 16px;
+    row-gap: 12px;
   }
 
   .bubble-menu-items .pill-list .pill-col {
@@ -276,9 +282,9 @@
   }
 
   .bubble-menu-items .pill-link {
-    font-size: clamp(1.2rem, 3vw, 4rem);
-    padding: clamp(1rem, 2vw, 2rem) 0;
-    min-height: 80px;
+    font-size: clamp(1.1rem, 4.5vw, 2rem);
+    padding: clamp(0.5rem, 2vw, 1.25rem) 0;
+    min-height: clamp(52px, 9vh, 72px);
   }
 
   .bubble-menu-items .pill-link:hover {

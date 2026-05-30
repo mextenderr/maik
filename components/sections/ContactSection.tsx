@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, type BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -104,6 +105,15 @@ export default function ContactSection() {
               Heb je een project in gedachten of gewoon een vraag? Stuur een
               bericht, dan neem ik zo snel mogelijk contact met je op.
             </p>
+
+            <div className="relative w-24 h-24 md:w-28 md:h-28 mx-auto lg:mx-0 mt-8 rounded-full overflow-hidden ring-4 ring-white shadow-md">
+              <Image
+                src="/images/maik-3.webp"
+                alt="Maik van Velthoven"
+                fill
+                className="object-cover object-top"
+              />
+            </div>
 
             <ul className="mt-8 flex flex-wrap lg:flex-col justify-center lg:justify-start gap-3 lg:gap-2">
               {contactChannels.map((channel) => {
