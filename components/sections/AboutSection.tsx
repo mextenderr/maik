@@ -19,7 +19,7 @@ export default function AboutSection() {
               className="relative w-[250px] h-[289px] md:w-[320px] md:h-[370px] -ml-16 md:ml-0 md:mr-auto shrink-0"
             >
               <Image
-                src="/images/maik-2.webp"
+                src="/images/maik-1.webp"
                 alt="Maik van Velthoven"
                 fill
                 className="object-cover rounded-[30px]"
@@ -47,7 +47,7 @@ export default function AboutSection() {
             className="relative w-[360px] h-[440px] shrink-0"
           >
             <Image
-              src="/images/maik-2.webp"
+              src="/images/maik-1.webp"
               alt="Maik van Velthoven"
               fill
               className="object-cover rounded-[30px]"
