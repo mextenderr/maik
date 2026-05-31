@@ -33,7 +33,7 @@ export default function StudioSection() {
             stagger={0.08}
             className="flex-1 flex justify-end"
           >
-            <div className="space-y-5 text-base md:text-lg font-medium text-[#1c1c1c] text-center lg:text-right leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <div className="space-y-5 text-base md:text-lg font-medium text-[#1c1c1c] text-center leading-relaxed max-w-2xl mx-auto lg:mx-0">
               <p>
                 Vanuit mijn thuisstudio werk ik met een Focusrite Scarlett Solo
                 (4th gen) audio-interface en een CM25

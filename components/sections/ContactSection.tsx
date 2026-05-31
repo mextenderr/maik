@@ -106,13 +106,23 @@ export default function ContactSection() {
               bericht, dan neem ik zo snel mogelijk contact met je op.
             </p>
 
-            <div className="relative w-24 h-24 md:w-28 md:h-28 mx-auto lg:mx-0 mt-8 rounded-full overflow-hidden ring-4 ring-white shadow-md">
+            <div className="mt-16 flex flex-col items-center gap-16 lg:mt-10 lg:flex-row lg:items-center lg:justify-start lg:gap-8">
               <Image
-                src="/images/maik-3.webp"
-                alt="Maik van Velthoven"
-                fill
-                className="object-cover object-top"
+                src="/stemacteren-certified.png"
+                alt="Gecertificeerd stemacteur"
+                width={569}
+                height={215}
+                className="h-auto w-40 md:w-48 shrink-0 lg:order-2"
               />
+
+              <div className="relative w-40 h-40 md:w-52 md:h-52 shrink-0 rounded-full overflow-hidden ring-4 ring-white shadow-md lg:order-1">
+                <Image
+                  src="/images/maik-3.webp"
+                  alt="Maik van Velthoven"
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
             </div>
 
             <ul className="mt-8 flex flex-wrap lg:flex-col justify-center lg:justify-start gap-3 lg:gap-2">

@@ -62,7 +62,7 @@ export default function AboutSection() {
             </p>
           </ScrollReveal>
           <ScrollReveal animation="fade-up" delay={0.25} stagger={0.08}>
-            <div className="space-y-5 text-base lg:text-right font-medium text-[#1c1c1c] leading-relaxed">
+            <div className="space-y-5 text-base text-center font-medium text-[#1c1c1c] leading-relaxed">
               <p>
                 Op jonge leeftijd ontdekte ik al mijn interesse voor
                 stemacteren. Terwijl ik voor de tv zat, vroeg ik me af: wie zit

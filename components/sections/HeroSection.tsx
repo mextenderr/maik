@@ -50,7 +50,7 @@ export default function HeroSection({
           <span data-hero-name1 className="block text-white text-7xl md:text-[6rem] lg:text-[7.5rem] xl:text-[9rem] font-semibold tracking-tighter leading-none">
             MAIK
           </span>
-          <span data-hero-name2 className="block text-white/30 lg:text-white/10 text-5xl md:text-[4.5rem] lg:text-[4.5rem] xl:text-[5.5rem] font-semibold tracking-tighter leading-none mt-1">
+          <span data-hero-name2 className="block text-white/30 lg:text-white/10 text-3xl md:text-[2.75rem] lg:text-[2.75rem] xl:text-[3.5rem] font-semibold tracking-tighter leading-none mt-1">
             VAN VELTHOVEN
           </span>
         </h1>
