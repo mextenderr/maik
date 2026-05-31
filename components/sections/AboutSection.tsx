@@ -41,7 +41,7 @@ export default function AboutSection() {
         </div>
 
         {/* Laptop+ layout: image + MAIK text + paragraphs inline */}
-        <div className="hidden lg:grid lg:grid-cols-[auto_auto_1fr] lg:items-center lg:gap-14">
+        <div className="hidden lg:grid lg:grid-cols-[auto_7rem_1fr] xl:grid-cols-[auto_9rem_1fr] lg:items-center lg:gap-14">
           <ScrollReveal
             animation="fade-left"
             className="relative w-[360px] h-[440px] shrink-0"
@@ -53,15 +53,15 @@ export default function AboutSection() {
               className="object-cover rounded-[30px]"
             />
           </ScrollReveal>
-          <ScrollReveal animation="fade-up" delay={0.15}>
+          <ScrollReveal animation="fade-up" delay={0.15} className="flex justify-center">
             <p
-              className="text-[7rem] xl:text-[9rem] font-semibold text-[#1c1c1c] leading-none"
+              className="w-[7rem] xl:w-[9rem] text-center text-[7rem] xl:text-[9rem] font-semibold text-[#1c1c1c] leading-none"
               style={{ writingMode: "vertical-rl" }}
             >
               MAIK
             </p>
           </ScrollReveal>
-          <ScrollReveal animation="fade-up" delay={0.25} stagger={0.08}>
+          <ScrollReveal animation="fade-up" delay={0.25} stagger={0.08} className="min-w-0">
             <div className="space-y-5 text-base text-center font-medium text-[#1c1c1c] leading-relaxed">
               <p>
                 Op jonge leeftijd ontdekte ik al mijn interesse voor
